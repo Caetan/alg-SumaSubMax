@@ -1,0 +1,102 @@
+1. INTRODUCCIÓN
+
+Este trabajo realizado por los alumnos Alexandre Velo Santórum y Caetán Tojeiro Carpente presenta la implementación de dos algoritmos que resuelven la suma de la subsecuencia máxima de números enteros.
+
+Se parte de un pseudocódigo para la implementación en C de dichos algoritmos.
+A continuación se valida el correcto funcionamiento de los mismos. Esta comprobación de los resultados se realiza mediante dos test, uno de ellos con vectores definidos y otro con vectores generados de forma pseudoaleatoria.
+Por último, se hace un estudio de los tiempos que han sido arrojados.
+
+
+2. HARDWARE
+
+Las características técnicas de la máquina en la que se han ejecutado los algoritmos y sus pruebas son las siguientes:
+
+- CPU: Intel Core i7-4790K 4.00GHz
+- Sistema Operativo: Ubuntu 14.04 LTS 64 bits
+- Memoria RAM: Kingston HyperX Fury Black DDR3 1866MHz de 16GB, con 2 módulos de 8GB CL10
+- Disco Duro: WD Blue 1TB SATA3 a 7200rpm con Buffer 64 MB Cache
+
+
+
+3. UNIDADES DE TIEMPO
+
+Las unidades de tiempo en las que se presentan los resultados obtenidos con las ejecuciones de los algoritmos son microsegundos.
+Como mínimo, los resultados se presentan con tres cifras significativas.
+
+
+
+4. ESTUDIO DE LOS RESULTADOS
+
+Las sucesivas ejecuciones de los algoritmos se realizan siguiendo una progresión geométrica del número de vectores que se ejecutan por dicho algoritmo. Si se le llama n a la cantidad de vectores con los que se trabaja en cada estudio del algoritmo, los valores para los que se ha obtenido un tiempo de ejecución de cada uno de los algoritmos son: n=500, n=1000, n=2000, n=4000, n=8000, n=16000, n=32000. En otras palabras, el tamaño de las entradas de la tabla sigue una progresión geométrica de razón dos, empezando en 500 y con 6 saltos.
+
+Para el estudio que se realiza a continuación se han generado 3 tablas de cada uno de los algoritmos y se han seleccionado como medidas a analizar la tabla con mejores tiempos arrojados.
+
+Seguidamente se muestran las tablas elegidas para el estudio a desarrollar:
+
+sumaSubMax 1
+              n           t(n)          t(n)/n^1.8            t(n)/n^2          t(n)/n^2.2
+(*)         500     285.320000            0.003955            0.001141            0.000329
+           1000    1113.000000            0.004431            0.001113            0.000280
+           2000    4494.000000            0.005138            0.001123            0.000246
+           4000   18525.000000            0.006082            0.001158            0.000220
+           8000   71620.000000            0.006753            0.001119            0.000185
+          16000  284688.000000            0.007708            0.001112            0.000160
+          32000 1125646.000000            0.008752            0.001099            0.000138
+
+
+
+sumaSubMax 2
+              n           t(n)          t(n)/n^0.8              t(n)/n     t(n)/(n*log(n))
+(*)         500       1.887500            0.013083            0.003775            0.000607
+(*)        1000       3.019600            0.012021            0.003020            0.000437
+(*)        2000       5.368200            0.012275            0.002684            0.000353
+(*)        4000       9.697400            0.012735            0.002424            0.000292
+(*)        8000      19.214500            0.014493            0.002402            0.000267
+(*)       16000      33.802600            0.014644            0.002113            0.000218
+(*)       32000      69.234300            0.017227            0.002164            0.000209
+
+
+
+
+	4.1 - Cotas ajustadas
+
+	Para el algoritmo sumaSubMax1 se puede establecer una cota ajustada en torno al intervalo de 0.0011 - 0.00112 mediante la ecuación t(n)/n^2 cuando n tiende a infinito.
+	Por otro lado, el algoritmo sumaSubMax2 ha sido acotado de manera ajustada por la función t(n)/n que oscila en un intervalo en torno a 0.0021 - 0.0022 cuando n tiende a infinito.
+
+
+	4.2 - Cota subestimada
+
+	Como cota subestimada se ha utilizado la función (t_a/n^1.8) para el algoritmo sumaSubMax1.
+	En cuanto a la función que acota inferiormente los resultados del algoritmo sumaSubMax2 se ha utilizado t(n)/n^0.8.
+
+	Estas funciones tienden a infinito cuando n tiende a infinito, por ser la cota subestimada.
+
+
+	4.3 - Cota sobrestimada
+
+	La función utilizada para acotar superiormente los resultados del algoritmo sumaSubMax1 es (t_a/n^2.2). 
+	Por otra parte, el algoritmo sumaSubMax2 puede acotarse mediante la ecuación t(n)/(n*log(n)).
+
+	Estas funciones tienden a cero cuando n tiende a infinito, por ser la cota sobrestimada.
+
+
+	4.4 - Estudio de los bucles
+
+	Las entradas de la tabla marcadas con el distintivo (*) indican que la medición del tiempo arrojado en un primer momento fue menor a un tiempo t de 500 microsegundos, por lo tanto se realiza un procedimiento especial para dicha medición que consiste en la ejecución del algoritmo repetidamente un número K de veces siendo siempre K una potencia de 10. 
+	En el caso del algoritmo sumaSubMax1 se ha trabajado con K=100, mientras que para el algoritmo sumaSubMax2, el valor de K elegido ha sido K=10000. A continuación, se hace un promedio de las K medidas tomadas para dar un resultado más ajustado del tiempo de ejecución del algoritmo. 
+
+
+	4.5 - Mediciones anómalas
+
+	Debe hacerse mención que la medida del algoritmo sumaSubMax2 para una ejecución de un vector de tamaño 500 no es correcta. En general, para vectores de tamaño más pequeño habría que modificar ligeramente el valor de K.
+
+
+5. CONCLUSIONES
+
+- Algoritmo sumaSubMax1: Este algoritmo presenta una complejidad de implementación baja, así como es también baja la dificultad para estudiar el mismo. Sin embargo, esta menor complejidad tiene como resultado que este algoritmo no posee una buena eficiencia.
+
+
+- Algoritmo sumaSubMax2: La eficiencia de este algoritmo va a la par a su dificultad de implementación así como su dificultad a la hora de estudiarlo, puesto que se ha requerido de un mayor tiempo para desarrollarlo y estudiarlo, aunque cabe mencionar que obtiene unos buenos resultados.
+
+
+En un contexto de puesta en común de ambos algoritmos, la conclusión que arroja este trabajo es que el algoritmo sumaSubMax2 es notablemente más rápido que el algoritmo sumaSubMax1. Si se presta atención a los resultados, el crecimiento de tiempo del algoritmo sumaSubMax1 es mayor al aumentar n que el de sumaSubMax2, el cual es el doble. Además de la más que notable diferencia de tiempo que hay comparando la ejecución del algoritmo sumaSubMax1 con sumaSubMax2.
